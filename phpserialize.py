@@ -507,6 +507,11 @@ def load(fp, charset='utf-8', errors=default_errors, decode_strings=False,
             if decode_strings:
                 name = name.decode(charset, errors)
             return object_hook(name, dict(_load_array()))
+        if type_ == b'r':
+            # Skip unsupported r type (reference)
+            _expect(b':')
+            data = _read_until(b';')
+            return None
         raise ValueError('unexpected opcode')
 
     return _unserialize()
