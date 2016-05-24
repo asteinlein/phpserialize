@@ -289,8 +289,8 @@ __all__ = ('phpobject', 'convert_member_dict', 'dict_to_list', 'dict_to_tuple',
 
 
 def _translate_member_name(name):
-    if name[:1] == ' ':
-        name = name.split(None, 2)[-1]
+    if name[:1] == '\x00':
+        name = name.split('\x00', 2)[-1]
     return name
 
 
